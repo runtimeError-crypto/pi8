@@ -4,20 +4,24 @@
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.15.0",
-        "@testing-library/react": "13.0.0-alpha.4",
-        "@testing-library/user-event": "14.0.0-alpha.14",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.5.0",
         "core-js": "^3.19.1",
-        "eslint": "^6.8.0",
+        "firebase": "^9.5.0",
         "jshint": "^2.13.1",
-        "react": "17.0.2",
-        "react-app-polyfill": "2.0.0",
-        "react-dom": "17.0.2",
+        "react": "^17.0.2",
+        "react-app-polyfill": "^2.0.0",
+        "react-dom": "^17.0.2",
+        "react-redux": "^7.2.6",
+        "react-router": "^6.0.2",
         "react-scripts": "^4.0.3",
+        "redux": "^4.1.2",
         "resolve-url-loader": "^4.0.0",
-        "uuid": "^7.0.3",
+        "uuid": "^8.3.2",
         "web-vitals": "^2.1.2",
         "webpac": "^0.0.1-security",
-        "webpack": "^4.44.2"
+        "webpack": "^5.64.1",
+        "yarn": "^1.22.17"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -41,13 +45,25 @@
             "last 1 chrome version",
             "last 1 firefox version",
             "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "eslint-plugin-react-hooks": "^1.7.0"
-    },
-    "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-    "main": "index.js",
-    "author": "",
-    "license": "ISC"
+        ],
+        "jshint.options": {
+            "esversion": 6
+        },
+        "devDependencies": {
+            "eslint-plugin-react-hooks": "^4.3.0"
+        },
+        "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+        "main": "index.js",
+        "author": "",
+        "license": "ISC",
+        "repository": {
+            "type": "git",
+            "url": "git+https://github.com/runtimeError-crypto/pi8.git"
+        },
+        "keywords": [],
+        "bugs": {
+            "url": "https://github.com/runtimeError-crypto/pi8/issues"
+        },
+        "homepage": "https://github.com/runtimeError-crypto/pi8#readme"
+    }
 }
