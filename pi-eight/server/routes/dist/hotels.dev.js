@@ -1,4 +1,3 @@
-"use strict";
 
 var _express = _interopRequireDefault(require("express"));
 
@@ -71,7 +70,7 @@ router.post("/signup", function (req, res, next) {
   var validationResult = validateSignupForm(req.body);
 
   if (!validationResult.success) {
-    return res.status(401).json({
+    return res.status(200).json({
       success: false,
       message: validationResult.message,
       errors: validationResult.errors
@@ -80,7 +79,7 @@ router.post("/signup", function (req, res, next) {
 
   return _passport["default"].authenticate('local-signup', function (err) {
     if (err) {
-      return res.status(401).json({
+      return res.status(200).json({
         success: false,
         message: 'Could not process the form'
       });
@@ -96,7 +95,7 @@ router.post("/login", function (req, res, next) {
   var validationResult = validateLoginForm(req.body);
 
   if (!validationResult.success) {
-    return res.status(401).json({
+    return res.status(200).json({
       success: false,
       message: validationResult.message,
       errors: validationResult.errors
@@ -105,7 +104,7 @@ router.post("/login", function (req, res, next) {
 
   return _passport["default"].authenticate('local-login', function (err, token, userData) {
     if (err) {
-      return res.status(401).json({
+      return res.status(200).json({
         success: false,
         message: 'Could not process the form'
       });

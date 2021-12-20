@@ -1,34 +1,41 @@
+"use strict";
 
+var _express = _interopRequireDefault(require("express"));
 
-var express = require('express');
+var _cors = _interopRequireDefault(require("cors"));
 
-var cors = require('cors');
+var _bodyParser = _interopRequireDefault(require("body-parser"));
 
-var bodyParser = require('body-parser');
+var _passport = _interopRequireDefault(require("passport"));
 
-var passport = require('passport');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var localSignupStrategy = require('./passport/local-signup');
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var localLoginStrategy = require("./passport/local-login");
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-var authRoutes = require("./routes/auth");
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var hotelRoutes = require("./routes/hotels");
-
-var app = express();
+Promise.resolve().then(function () {
+  return _interopRequireWildcard(require("./passport/local-signup"));
+});
+var hotelRoutes = "./routes/hotels";
+var authRoutes = './routes/auth';
+var app = (0, _express["default"])();
+var localSignupStrategy = '../local-signup';
+var localLoginStrategy = '../local-login';
 var port = 5000;
-app.use(bodyParser.urlencoded({
+app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
-app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use(cors());
-app.use('local-signup', localSignupStrategy);
-app.use('local-login', localLoginStrategy); //routes
+app.use(_bodyParser["default"].json());
+app.use(_passport["default"].initialize());
+app.use((0, _cors["default"])());
+app.use(localSignupStrategy);
+app.use(localLoginStrategy); //routes
 
-app.use('/auth', authRoutes);
-app.use('/hotels', routess);
+app.use(authRoutes);
+app.use(hotelRoutes);
 app.listen(port, function () {
   console.log("Server running on ".concat(port, "..."));
 });

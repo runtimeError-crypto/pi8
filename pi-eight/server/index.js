@@ -1,13 +1,18 @@
-const express = require('express')
-const cors = require('cors') 
-const bodyParser = require('body-parser')
-const passport = require('passport')    
-const localSignupStrategy = require('./passport/local-signup')
-const localLoginStrategy = require(`./passport/local-login`)
-const authRoutes = require(`./routes/auth`)
-const hotelRoutes = require(`./routes/hotels`)
+
+import express from 'express'
+
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import passport from 'passport' ; 
+import ("./passport/local-signup")
+const hotelRoutes = `./routes/hotels`
+const authRoutes = './routes/auth'
+const app  = express()
+
  
-const app = express()
+const localSignupStrategy = '../local-signup'
+const localLoginStrategy = '../local-login'
+
 
 const port = 5000
 
@@ -16,12 +21,13 @@ app.use(bodyParser.json())
 app.use(passport.initialize())
 app.use(cors())
 
-app.use('local-signup', localSignupStrategy)
-app.use('local-login', localLoginStrategy)
+app.use(localSignupStrategy)
+app.use(localLoginStrategy)
 
 //routes
-app.use('/auth', authRoutes)
-app.use('/hotels', routess)
+app.use(authRoutes)
+app.use(hotelRoutes)
+
 
 app.listen(port, () => {
     console.log(`Server running on ${port}...`)

@@ -1,10 +1,13 @@
-const express = require("express");
-const passport = require("passport");
-const validator = require("validator");
+import express from "express"
+import passport from "passport"
+import validator from "validator"
 
-const router = new express.Router();
 
-function validateSignupform(payload) {
+const router = express.Router();
+
+
+
+function validateSignupForm(payload) {
   const errors = {};
   let isFormValid = true;
   let message = "";
@@ -12,7 +15,7 @@ function validateSignupform(payload) {
   if (
     !payload ||
     typeof payload.email !== "string" ||
-    validator.isEmail(payload.email)
+    !validator.isEmail(payload.email)
   ) {
     isFormValid = false;
     errors.email = "Please provide a correct email address";
@@ -45,29 +48,21 @@ function validateSignupform(payload) {
     message,
     errors,
   };
+}
 
-  function validateLoginForm(payload) {
-    const errors = {};
-    let isFormValid = true;
-    let message = "";
-
-    if (
-      !payload ||
-      typeof payload.name !== "string" ||
-      payload.name.trim().length === 0
-    ) {
-      isFormValid = false;
-      errors.name = "Please provide your name";
-    }
-  }
+function validateLoginForm(payload) {
+  const errors = {};
+  let isFormValid = true;
+  let message = "";
   if (
     !payload ||
     typeof payload.email !== "string" ||
-    payload.isEmail(payload.email)
-  ) {
-    isFormValid = false;
+    payload.email.trim().length === 0) {
+    isFormValid = false
     errors.email = "Please provide a correct email address";
   }
+
+
   if (
     !payload ||
     typeof payload.password !== "string" ||
@@ -85,17 +80,67 @@ function validateSignupform(payload) {
     message,
     errors,
   };
+}
 
-  router.post("/signup", (req, res, next) => {
-    const validationResult = validateSignupForm(req.body);
-    if (!validationResult.success) {
+router.post("/signup", (req, res, next) => {
+  const validationResult = validateSignupForm(req.body);
+  if (!validationResult.success) {
+    return res.status(200).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors,
+    });
+  }
+
+  return passport.authenticate('local-signup', (err) => {
+    if (err) {
       return res.status(200).json({
         success: false,
-        message: validateionResult.message,
-        errors: validatoinResult.errors,
-      });
+        message: 'Could not process the form'
+      })
     }
-  });
+    return res.status(200).json({
+      success: true,
+      message: "You have signed up!  Please log in"
+    })
+  })(req, res, next)
+})
 
-  f;
-}
+
+
+
+
+router.post("/login", (req, res, next) => {
+  const validationResult = validateLoginForm(req.body);
+  if (!validationResult.success) {
+    return res.status(200).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors,
+    });
+  }
+ 
+   
+    
+
+      return passport.authenticate('local-login', (err, token, userData) => {
+        if (err) {
+          return res.status(200).json({
+            success: false,
+            message: 'Could not process the form'
+          })
+        }
+        return res.json({
+          success: true,
+          message: 'You have successfully logged in',
+          token,
+          user: userData
+        })
+      })(req, res, next)
+    })
+    module.exports = router
+
+
+
+
+
