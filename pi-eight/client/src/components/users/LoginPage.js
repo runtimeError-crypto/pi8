@@ -1,7 +1,8 @@
 import React from 'react'
-import LoginForm from './LoginFor'
+import LoginForm from './LoginForm'
 import Auth from './Auth'
-import FormHelpers from '../common/FormHelpers'
+// eslint-disable-next-line no-unused-vars
+import FormHelpers from '../../common/FormHelpers'
 import UserActions from '../../actions/UserActions'
 import UserStore from '../../stores/UserStore'
 import toastr from 'toastr'
@@ -12,7 +13,7 @@ class LoginPage extends React.Component {
 
         this.state = {
             user: {
-                email: 'test@test.com'
+                email: 'test@test.com',
                 password: '132236'
             },
             error: ''
@@ -21,11 +22,11 @@ class LoginPage extends React.Component {
 
             this.handleUseLogin = this.handleUserLogin.bind(this)
 
-            UserStore.on(UseStore.eventTypes.USER_LOGGED_IN, this.handleUserLogin)
+            UserStore.on(UserStore.eventTypes.USER_LOGGED_IN, this.handleUserLogin)
         }
 
         componentWillUnmount() {
-            UserStore.removeListner(UserStore.evenTypes.USER_LOGGED_IN, this.handleUserLogin)
+            UserStore.removeListner(UserStore.eventTypes.USER_LOGGED_IN, this.handleUserLogin)
         }
 
         handleUserForm (ev) {
@@ -35,11 +36,12 @@ class LoginPage extends React.Component {
 
         handleUserLogin (data) {
             if(!data.success){
-                error.data.message
+                this.setState({
+                error: data.message
             })
         } else {
             Auth.authenticateUser(data.token)
-            Auth.saveUser(data.token)
+            Auth.saveUser(data.user)
             toastr.success(data.message)
             this.props.history.push('/')
         }
