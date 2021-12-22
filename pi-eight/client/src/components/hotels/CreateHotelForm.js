@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from '../common/Input'
 
-let CreateHotelForm = (props) => (
+let CreateHotelForm = (props) => {
     <form>
         <Input
             name='name'
@@ -23,7 +23,7 @@ let CreateHotelForm = (props) => (
          <Input
                 name='description'
                 placeholder='Description'
-                vale={props.description}
+                value={props.description}
                 onChange={props.onChange}
                 rows='8' cols='70'
                 required
@@ -55,9 +55,9 @@ let CreateHotelForm = (props) => (
             onChange={props.onChange}
             type='number' />
         
-        <input type='submit' onClick={props.onSave} />
     </form>
-)
+        <input type='submit' onClick={props.onSave} />
+}
 export default CreateHotelForm
         
 

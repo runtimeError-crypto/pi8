@@ -3,7 +3,7 @@ import FormHelpers from '../common/FormHelpers'
 import UserActions from '../../actions/UserActions'
 import UserStore from '../../stores/UserStore'
 import toastr from 'toastr'
-import RegisterForm from 'react'
+import RegisterForm from './RegisterForm'
 
 class registerPage extends React.Component {
     constructor (props) {
@@ -11,9 +11,9 @@ class registerPage extends React.Component {
 
         this.state = {
             user: {
-                email: 'test@test.com'
-                password: '132236'
-                confirmPassword: '332423423
+                email: 'test@test.com',
+                password: '132236',
+                confirmPassword: '33242342',
                 name: 'Test'
             },
             error: ''
@@ -23,7 +23,7 @@ class registerPage extends React.Component {
             this.handleUseRegistration= this.handleUserRegistration.bind(this)
 
             UserStore.on(UserStore.eventTypes.USER_REGISTERED, this.handleUserRegistration)
-
+        }
         componentWillUnmount() {
             UserStore.removeListner(UserStore.evenTypes.USER_REGISTERED, this.handleUserRegistration)
         }
@@ -61,6 +61,7 @@ validateUser() {
     let error = ''
 
     if (user.password !== user.confirmPassword) {
+        formIsValid = false
         error = 'Password and confirmation password do not match'
     }
 

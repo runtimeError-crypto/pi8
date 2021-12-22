@@ -19,7 +19,8 @@ class CreateHotelPage extends React.Component {
             },
             error:''
         }
-        this.handleHotelCreation = this.handleHotelCreation.bind(this)HotelStore.on(HotelStore.eventTypes.HOTEL_CREATED, this.handleHotelCreation)
+        this.handleHotelCreation = this.handleHotelCreation.bind(this)
+        HotelStore.on(HotelStore.eventTypes.HOTEL_CREATED, this.handleHotelCreation)
     }
 
     componentWillUnmount (){
@@ -38,7 +39,7 @@ handleHotelCreation (data) {
     if(!data.success) {
         let firstError = data.message
 
-        if (data.errors)
+        if (data.errors){
         firstError = Object.keys(data.errors).map(k => data.errors[k])[0]
     }
      

@@ -19,7 +19,7 @@ class Auth {
     }
 
     static isUserAthenticated() {
-        return window.localStorage.removeItem('token')
+        return window.localStorage.removeItem('token') !==null
     }
 
     static deauthenticateUser() {

@@ -1,14 +1,14 @@
 import dispatcher from '../dispatcher'
-
 const hotelActions = {
     types: {
         CREATE_HOTEL: 'CREATE_HOTEL',
         ALL_HOTELS: 'ALL_HOTELS',
         DETAILS: 'DETAILS'
     },
-
+    
     create(hotel) {
-        dispatcher.dispatch({
+       
+        dispatcher.dispatcher({
             type: this.types.CREATE_HOTEL,
             hotel
         })

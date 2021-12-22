@@ -1,14 +1,15 @@
 import React from 'react'
 import HotelActions from '../../actions/HotelActions'
 import HotelStore from '../../stores/HotelStore'
-import queryString from 'queryStrig'
-import { Link } from from 'react-router-dom'
+import queryString from 'query-String'
+import { Link } from 'react-router-dom'
 
 class ListHotelsPage extends React.Component {
     constructor(props) {
         super(props)
         let query = queryString.parse(props.location.search)
-        let page = Number(query.page) || 1 this.state = {
+        let page = Number(query.page) || 1 
+        this.state = {
             hotels: [],
             page: page
 
@@ -18,14 +19,14 @@ class ListHotelsPage extends React.Component {
     }
 
     componentDidMount() {
-        HotelActions.all.(this.state.page)
+        HotelActions.all(this.state.page)
     }
 
     componentWillUnmount() {
         HotelStore.removeListener(HotelStore.eventTypes.HOTELS_FETCHED, this.handleHotelsFetching)
     }
 
-    handleHoteelsFetching(data) {
+    handleHotelsFetching(data) {
         this.setState({
             hotels: data
         })

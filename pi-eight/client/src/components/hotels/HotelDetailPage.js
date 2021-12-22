@@ -15,19 +15,19 @@ class HotelDetailsPage extends React.Component {
                 id
             },
             rating: 0,
-            comment: ''
-            error: ''
+            comment: '',
+            error: '',
             reviews: ''
 
         }
 
-        
+        this.hoelDetailsFetched = this.hotelDetailsFetched.bind(this)
         this.handleReviewCreation = this.handleReviewCreation.bind(this)
         this.reviewsFetched = this.reviewsFetched.bind(this)
         ReviewStore.on(ReviewStore.eventTypes.REVIEW_CREATED, this.handleReviewCreation)
         HotelStore.on(HotelStore.eventTypes.HOTEL_DETAILS_FETCHED, this.hotelDetailsFetched)
         ReviewStore.on(ReviewStore.eventTypes.REVIEWS_FETCHED, this.reviewsFetched)
-
+    }
         componentDidMount() {
             HotelActions.details(this.state.hotel.id)
             ReviewActions.getAll(this.state.hotel.id)
@@ -38,14 +38,14 @@ class HotelDetailsPage extends React.Component {
             HotelStore.removeLisnener(HotelStore.eventTypes.HOTEL_DETAILS_FETCHED, this.hotelDetailsFetched)
             ReviewStore.removeLisnener(ReviewStore.eventTypes.REVIEW_CREATED, this.handleReviewCreation)
             ReviewStore.removeLisnener(ReviewStore.eventTypes.REVIEWS_FETCHED, this.reviewsFetched)
-
+        }
             hotelDetailsFetched(data) {
                 this.setState({
                     hotel: data
                 })
             }
     
-            reviewsFetched()(data) {
+            reviewsFetched(data) {
                 this.setState({
                     reviews: data
                 })
@@ -58,10 +58,10 @@ class HotelDetailsPage extends React.Component {
                 })
             }
 
-            handleCommentChange(ev) {
+            handleCommentChange (ev) {
                 let value = ev.target.value
                 this.setState({
-                    comment.value
+                    comment: value
                 })
             }
 
@@ -118,7 +118,7 @@ class HotelDetailsPage extends React.Component {
                         <p>Location:{this.state.hotel.location}</p>
                         <p>Description: {this.state.hotel.description}</p>
                         <p>Rooms: {this.state.hotel.numberOfRooms}</p>
-                        <p>Paarking Slots: {this.state.hotel.parkingSlots ? Parking slots: {this.state.hotel.parkingSlots}</p> : null}
+                         {this.state.hotel.parkingSlots ?<p>  parkingSlots: {this.state.hotel.parkingSlots} </p> : null}
                         <h3>Add Review: </h3>
                         <form>
                             <div>{this.state.error}</div>
@@ -145,7 +145,7 @@ class HotelDetailsPage extends React.Component {
                         {reviews}
                     </div>
                 )
-            }
+            
         }
-    
+    }
         export default HotelDetailsPage

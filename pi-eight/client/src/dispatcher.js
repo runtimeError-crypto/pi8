@@ -1,5 +1,3 @@
 import { Dispatcher } from 'flux'
 
-const dispatcher = Dispatcher
-
-export default new dispatcher()
+export default new Dispatcher()

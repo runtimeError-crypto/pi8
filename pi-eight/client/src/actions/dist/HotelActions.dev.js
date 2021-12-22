@@ -16,7 +16,7 @@ var hotelActions = {
     DETAILS: 'DETAILS'
   },
   create: function create(hotel) {
-    _dispatcher["default"].dispatch({
+    _dispatcher["default"].dispatcher({
       type: this.types.CREATE_HOTEL,
       hotel: hotel
     });

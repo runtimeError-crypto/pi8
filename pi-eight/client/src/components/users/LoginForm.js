@@ -8,17 +8,17 @@ const LoginForm = (props) => (
             name='email'
             type='email'
             placeholder='Email'   
-            vallue={props.user.email} 
+            value={props.user.email} 
             onChange={props.onChange} />
         
         <Input
             name='password'
             type='password'
             placeholder='Password'
-            vallue={props.user.password}
+            value={props.user.password}
             onChange={props.onChange} />
         
         <input type='submit' onClick={props.onSave} />
         </form>    
 )
- exports default LoginForm
+ export default LoginForm
